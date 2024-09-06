@@ -1,0 +1,116 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+
+h1{
+    font-size: 28px;
+    color: #000;
+    font-weight: 600;
+}
+h4{
+    font-size: 18.5px;
+    color: #000;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-inline: 6px;
+}
+
+ion-item-divider {
+    --background: #f5f5f5;
+    border: 0px;
+    min-height: 10px;
+  }
+
+.custom-loader {
+  background: rgb(255 255 255 / 70%) !important;
+  .loading-wrapper{
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    img{
+      height:60px;
+    }
+  }
+}
+
+.custom-segment {
+    ion-segment {
+      --background: #ffffff !important;
+      background: #ffffff !important;
+      border-radius: 0px !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+  
+      ion-segment-button {
+        flex-basis:auto;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+        --background: #e6e6e685;
+        --background-checked: var(--ion-color-primary);
+        --color-hover: var(--ion-color-primary);
+        --color-checked: #fff;
+        --color: #5B5B5B;
+        --border-radius: 12px;
+        --indicator-height: 0px;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: none !important;
+  
+        min-height: 50px;
+        min-width: 100px;
+        border-radius: 8px;
+        font-size: 15px;
+        color: #000;
+        margin-inline: 6px;
+        --border-width: 0px;
+        --border-color: transparent;   
+      }
+    }
+  }
+
+  ion-select::part(icon) {
+    color: #333;
+    opacity: 1;
+    position: absolute;
+    right: 16px;
+  }
+
+  ion-select::part(placeholder) {
+    color: #333;
+    opacity: 1;
+  }

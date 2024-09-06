@@ -1,0 +1,146 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="position: absolute;">
+      <ion-button (click)="goBack()" style="--padding-top: 2px; --padding-end: 2px; --padding-bottom: 2px; --padding-start: 2px;">
+        <ion-icon class="custom-icon" slot="icon-only" src="/assets/icons/back.svg" style="height: 35px;width: 35px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" style="font-size: 20px;">Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">feedback</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form *ngIf="isFeedbackForm" [formGroup]="feedbackForm" (ngSubmit)="onSubmit_FeedbackForm()">
+
+  <div class="ion-padding">
+    <h4>Please Select type of feedback</h4>
+    <ion-toolbar class="custom-segment" mode="md">
+    <ion-segment mode="ios" (ionChange)="onFeedbackTypeChange($event)" [value]="selectedFeedbackType">
+      <ion-segment-button value="APPLICATION">
+        <ion-label>App Suggestion</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="ORDER">
+        <ion-label>Problem on the order</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    </ion-toolbar>
+  </div>
+  <ion-item-divider></ion-item-divider>
+
+
+  <div class="ion-padding">
+    <h4>Location</h4>
+    <ion-item mode="md" style="--background: #e6e6e685; --min-height: 50px;border-radius: 6px;margin-inline: 6px;" lines="none">
+    <ion-select formControlName="master_restaurant_uuid" justify="start" [multiple]="false" 
+                interface="action-sheet" style="width:100%;" placeholder="Select Location">
+        <ion-select-option *ngFor="let ml of masterLocation" [value]="ml.master_restaurant_uuid">
+          {{ml.master_restaurant_address}}
+        </ion-select-option>
+    </ion-select>
+    </ion-item>
+  </div>
+  <ion-item-divider></ion-item-divider>
+
+
+
+  <div class="ion-padding">
+    <h4>Suggestion/Complaints</h4>
+    <div class="suggestion-box">
+      <textarea formControlName="feedback_info_suggestion" placeholder="Enter your feedback here... such as product feedback, order problems and etc, we will try to improve..."></textarea>
+    </div>
+    <div *ngIf="feedbackForm.get('feedback_info_suggestion')?.invalid && feedbackForm.get('feedback_info_suggestion')?.touched">
+      <p *ngIf="feedbackForm.get('feedback_info_suggestion')?.errors?.['required']">Suggestion is required.</p>
+      <p *ngIf="feedbackForm.get('feedback_info_suggestion')?.errors?.['maxlength']">Suggestion cannot exceed 500 characters.</p>
+    </div>
+  </div>
+  <ion-item-divider></ion-item-divider>
+
+
+  <div class="ion-padding">
+    <h4>Attachments</h4>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" style="display: flex; justify-content: center;">
+          <div class="image-container">
+            <ion-thumbnail *ngIf="feedbackForm.get('feedback_info_attachment_1')?.value; else addImage1">
+              <ion-img [src]="feedbackForm.get('feedback_info_attachment_1')?.value"></ion-img>
+              <ion-button fill="clear" size="small" (click)="removeImage('feedback_info_attachment_1')" class="delete-button">
+                <ion-icon slot="icon-only" src="/assets/icons/delete.svg" style="height:24px; width: 24px;"></ion-icon>
+              </ion-button>
+            </ion-thumbnail>
+            <ng-template #addImage1>
+              <div class="template-container" (click)="captureImage('feedback_info_attachment_1')">
+                <ion-button fill="clear" size="small">
+                  <ion-icon name="add" slot="icon-only" color="medium"></ion-icon>
+                </ion-button>
+                <ion-note>Add image</ion-note>
+              </div>
+            </ng-template>
+          </div>
+        </ion-col>
+  
+        <ion-col size="4" style="display: flex; justify-content: center;">
+          <div class="image-container">
+            <ion-thumbnail *ngIf="feedbackForm.get('feedback_info_attachment_2')?.value; else addImage2">
+              <ion-img [src]="feedbackForm.get('feedback_info_attachment_2')?.value"></ion-img>
+              <ion-button fill="clear" size="small" (click)="removeImage('feedback_info_attachment_2')" class="delete-button">
+                <ion-icon slot="icon-only" src="/assets/icons/delete.svg" style="height:24px; width: 24px;"></ion-icon>
+              </ion-button>
+            </ion-thumbnail>
+            <ng-template #addImage2>
+              <div class="template-container" (click)="captureImage('feedback_info_attachment_2')">
+                <ion-button fill="clear" size="small">
+                  <ion-icon name="add" slot="icon-only" color="medium"></ion-icon>
+                </ion-button>
+                <ion-note>Add image</ion-note>
+              </div>
+            </ng-template>
+          </div>
+        </ion-col>
+  
+        <ion-col size="4" style="display: flex; justify-content: center;">
+          <div class="image-container">
+            <ion-thumbnail *ngIf="feedbackForm.get('feedback_info_attachment_3')?.value; else addImage3">
+              <ion-img [src]="feedbackForm.get('feedback_info_attachment_3')?.value"></ion-img>
+              <ion-button fill="clear" size="small" (click)="removeImage('feedback_info_attachment_3')" class="delete-button">
+                <ion-icon slot="icon-only" src="/assets/icons/delete.svg" style="height:24px; width: 24px;"></ion-icon>
+              </ion-button>
+            </ion-thumbnail>
+            <ng-template #addImage3>
+              <div class="template-container" (click)="captureImage('feedback_info_attachment_3')">
+                <ion-button fill="clear" size="small">
+                  <ion-icon name="add" slot="icon-only" color="medium"></ion-icon>
+                </ion-button>
+                <ion-note>Add image</ion-note>
+              </div>
+            </ng-template>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>  
+  <ion-item-divider></ion-item-divider>
+
+  <ion-button type="submit" expand="block" color="dark" class="ion-padding" size="large" style="text-transform: none;opacity: 1;">
+    Submit
+  </ion-button>
+
+  </form>
+
+  <ion-card *ngIf="!isFeedbackForm">
+    <ion-card-header>
+      <ion-card-title>Thanks for connecting us.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Your feedback has been successfully submitted. We appreciate you taking the time to share your thoughts with us. Our team will review your feedback and get back to you if necessary.
+      <ion-button routerLink="/" fill="solid" color="dark">Go to Home</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
